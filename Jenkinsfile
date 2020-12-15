@@ -6,5 +6,13 @@ pipeline {
                 git 'https://github.com/vitamingau/java-test.git'
             }
         }
+        stage('docker hub'){
+            steps {
+                withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
+                    sh 'docker build -t phuphan/java-test:v10 .'
+                    sh 'docker push phuphan/java-test:v10'
+                }
+            }
+        }
     }
 }
