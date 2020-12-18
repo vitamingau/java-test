@@ -9,7 +9,8 @@ pipeline {
         stage('ssh remote server') {
             steps {
                 sshagent(['ssh-remote']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l root 10.148.0.54 /home/phuphanpa/ktpa/bin/build'
+                    sh 'ssh -o StrictHostKeyChecking=no -l root 10.148.0.54 cd /home/phuphanpa/ktpa/'
+                    sh 'ssh -o StrictHostKeyChecking=no -l root 10.148.0.54 bin/build'
                 }
             }
         }
