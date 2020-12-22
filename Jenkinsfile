@@ -18,7 +18,7 @@ pipeline {
         stage('ssh remote server') {
             steps {
                 sshagent(['ssh-remote']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 touch a'                 
+                    sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker run -d --name java-test -p 8080:8080 phuphan/java-test'                 
                 }
             }
         }
