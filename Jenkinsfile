@@ -20,7 +20,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     //sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker stop $(docker ps -aq)'
                     //sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker rm $(docker ps -aq)'
-                    sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker run -d --name java-test -p 8080:8080 phuphan/java-test:v10'                 
+                    sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker run -d -p 8080:8080 phuphan/java-test:v10'                 
                 }
             }
         }
