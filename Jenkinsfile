@@ -32,6 +32,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'docker stop $(docker ps -aq)'
                 sh 'docker run -d -p 8080:8080 phuphan/java-test:v10'
             }
         }
