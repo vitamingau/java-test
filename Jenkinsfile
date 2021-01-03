@@ -15,13 +15,22 @@ pipeline {
                 }
             }
         }
-        stage('ssh remote server') {
-            steps {
-                sshagent(['ssh-remote']) {
+        //stage('ssh remote server') {
+        //    steps {
+        //        sshagent(['ssh-remote']) {
                     //sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker stop $(docker ps -aq)'
                     //sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker rm $(docker ps -aq)'
-                    sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker run -d -p 8080:8080 phuphan/java-test:v10'                 
-                }
+        //            sh 'ssh -o StrictHostKeyChecking=no -l root 35.240.166.66 docker run -d -p 8080:8080 phuphan/java-test:v10'
+        //        }
+        //   }
+        //}
+        stage('java-remote'){
+            agent{
+                label 'java-remote-server'
+                customWorkspace '/home/phuphanpa/jenkins'
+            }
+            steps{
+                sh 'touch b'
             }
         }
     }
