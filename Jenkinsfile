@@ -25,12 +25,9 @@ pipeline {
         //   }
         //}
         stage('java-remote'){
-            agent{
-                label 'java-remote-server'
-                customWorkspace '/home/phuphanpa/jenkins'
-            }
-            steps{
-                sh 'touch b'
+            node('java-remote-server') {
+                // some block
+                sh 'touch b.txt'
             }
         }
     }
