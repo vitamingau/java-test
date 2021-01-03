@@ -1,20 +1,20 @@
 pipeline {
     agent none
     stages {
-        // stage('Clone'){
-        //     steps {
-        //         git 'https://github.com/vitamingau/java-test.git'
-        //     }
-        // }
-        // stage('docker hub'){
-        //     steps {
-        //         withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-        //             sh 'chmod +x bin/build'
-        //             sh 'bin/build'
-        //             sh 'docker push phuphan/java-test:v10'
-        //         }
-        //     }
-        // }
+        stage('Clone'){
+            steps {
+                git 'https://github.com/vitamingau/java-test.git'
+            }
+        }
+        stage('docker hub'){
+            steps {
+                withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
+                    sh 'chmod +x bin/build'
+                    sh 'bin/build'
+                    sh 'docker push phuphan/java-test:v10'
+                }
+            }
+        }
         // //stage('ssh remote server') {
         //    steps {
         //        sshagent(['ssh-remote']) {
@@ -24,15 +24,15 @@ pipeline {
         //        }
         //   }
         //}
-        stage('test-remote'){
+        stage('ssh-remote'){
             agent {
                 node{
                     label 'java-remote-server'
-                    customWorkspace '/home/phuphanpa/jenkins'
+                    customWorkspace '/home/phuphanpa/java-test'
                 }
             }
             steps {
-                sh 'touch b'
+                sh 'docker run -d -p 8080:8080 phuphan/java-test:v10'
             }
         }
     }
