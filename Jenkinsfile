@@ -1,5 +1,10 @@
 pipeline {
-    agent none
+    agent {
+        node {
+            label 'java-remote-server'
+            customWorkspace '/home/phuphanpa/jenkins'
+        }
+    }
     stages {
         // stage('Clone'){
         //     steps {
@@ -24,11 +29,8 @@ pipeline {
         //        }
         //   }
         //}
-        stage('java-remote'){
-            node('java-remote-server') {
-                // some block
-                sh 'touch b.txt'
-            }
+        stage{'kt-ketnoi'}{
+            sh 'touch b.txt'
         }
     }
 }
